@@ -59,7 +59,7 @@
 
     <script>
         $.get('products.json', function(data) {
-            let categories = new Set();
+            let categories = new Set(['All']); // Add 'All' to the categories set
             data.products.forEach(product => {
                 product.categories.forEach(category => categories.add(category));
             });
@@ -68,11 +68,10 @@
                 $('#categoryFilter').append(new Option(category, category));
             });
 
-            $('#filterBtn').click(function() {
-                const selectedCategory = $('#categoryFilter').val();
+            const displayProducts = (filter = null) => {
                 let filteredHTML = '';
                 data.products.forEach(product => {
-                    if (product.categories.includes(selectedCategory)) {
+                    if (!filter || filter === 'All' || product.categories.includes(filter)) {
                         filteredHTML += `<div class="product">
                                             <h2>${product.name}</h2>
                                             <p class="price">Price: $${product.price}</p>
@@ -81,6 +80,14 @@
                     }
                 });
                 $('#filteredProducts').html(filteredHTML);
+            };
+
+            // Initial display of all products
+            displayProducts();
+
+            $('#filterBtn').click(function() {
+                const selectedCategory = $('#categoryFilter').val();
+                displayProducts(selectedCategory);
             });
         }, 'json');
     </script>
