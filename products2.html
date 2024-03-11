@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Products JSON Display</title>
+    <title>Filtered Products Display</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
         body {
@@ -11,44 +11,77 @@
             padding: 20px;
             background-color: #f0f0f0;
         }
-
-        .product {
+        .product, #filteredProducts {
             background-color: #fff;
             padding: 20px;
             margin-bottom: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
-
         .product h2 {
             margin-top: 0;
+            color: #333;
         }
-
+        .price, .categories {
+            font-weight: bold;
+        }
         .price {
-            color: green;
+            color: #28a745;
         }
-
         .categories {
             color: #007bff;
+        }
+        #filterBtn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #filterBtn:hover {
+            background-color: #0056b3;
+        }
+        #categoryFilter {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Products</h1>
-    <div id="productsDisplay"></div>
+    <h1>Filter Products</h1>
+    <select id="categoryFilter"></select>
+    <button id="filterBtn">Filter</button>
+    <div id="filteredProducts"></div>
 
     <script>
         $.get('products.json', function(data) {
-            let productsHTML = '';
+            let categories = new Set();
             data.products.forEach(product => {
-                productsHTML += `<div class="product">
-                                    <h2>${product.name}</h2>
-                                    <p>${product.description}</p>
-                                    <p class="price">Price: $${product.price}</p>
-                                    <p class="categories">Categories: ${product.categories.join(', ')}</p>
-                                 </div>`;
+                product.categories.forEach(category => categories.add(category));
             });
-            $('#productsDisplay').html(productsHTML);
+            
+            categories.forEach(category => {
+                $('#categoryFilter').append(new Option(category, category));
+            });
+
+            $('#filterBtn').click(function() {
+                const selectedCategory = $('#categoryFilter').val();
+                let filteredHTML = '';
+                data.products.forEach(product => {
+                    if (product.categories.includes(selectedCategory)) {
+                        filteredHTML += `<div class="product">
+                                            <h2>${product.name}</h2>
+                                            <p class="price">Price: $${product.price}</p>
+                                            <p class="categories">Categories: ${product.categories.join(', ')}</p>
+                                          </div>`;
+                    }
+                });
+                $('#filteredProducts').html(filteredHTML);
+            });
         }, 'json');
     </script>
 </body>
