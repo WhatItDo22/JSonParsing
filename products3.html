@@ -59,6 +59,7 @@
 <body>
     <h1>Filter Products</h1>
     <select id="categoryFilter">
+        <!-- "All" option is added here directly to ensure it appears only once -->
         <option value="All">All</option>
     </select>
     <button id="filterBtn">Filter</button>
@@ -66,6 +67,8 @@
 
     <script>
         $.get('products.json', function(data) {
+
+            let categories = new Set(); 
             data.products.forEach(product => {
                 product.categories.forEach(category => categories.add(category));
             });
