@@ -5,55 +5,55 @@
     <title>Filtered Products Display</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
-            body {
+        body {
             font-family: 'Arial', sans-serif;
             margin: 20px;
             padding: 20px;
             background-color: #f9f9f9;
             color: #333;
-            }
-            .product, #filteredProducts {
+        }
+        .product, #filteredProducts {
             background-color: #ffffff;
             padding: 20px;
             margin-bottom: 20px;
             border: 1px solid #e1e1e8;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             border-radius: 8px;
-            }
-            .product h2 {
+        }
+        .product h2 {
             margin-top: 0;
             color: #333;
             font-size: 24px;
-            }
-            .price {
+        }
+        .price, .description, .categories {
+            margin: 5px 0;
+        }
+        .price {
             font-weight: bold;
             color: #28a745;
             font-size: 18px;
-            }
-            .categories {
+        }
+        .categories {
             font-weight: bold;
             color: #007bff;
             font-size: 16px;
-            }
-            #filterBtn, #categoryFilter {
+        }
+        #filterBtn, #categoryFilter {
             padding: 10px 20px;
             font-size: 16px;
             border-radius: 5px;
             margin: 10px 0;
             border: 1px solid #ddd;
-            }
-            #filterBtn {
+            cursor: pointer;
+        }
+        #filterBtn {
             background-color: #0056b3;
             color: white;
             border: none;
-            cursor: pointer;
-            }
-            #filterBtn:hover {
+        }
+        #filterBtn:hover {
             background-color: #004094;
-            }
-            #categoryFilter {
-            cursor: pointer;
-            }
+        }
     </style>
 </head>
 <body>
@@ -78,8 +78,16 @@
             const displayProducts = (filter = 'All') => {
                 let filteredHTML = '';
                 data.products.forEach(product => {
-                    if (filter === 'All' || product.categories.includes(filter)) {
-                        // Adjusted to display only the product name
+                    if (filter === 'All') {
+                        // Display all details when page loads or 'All' is selected
+                        filteredHTML += `<div class="product">
+                                            <h2>${product.name}</h2>
+                                            <p class="description">${product.description}</p>
+                                            <p class="price">Price: $${product.price}</p>
+                                            <p class="categories">Categories: ${product.categories.join(', ')}</p>
+                                          </div>`;
+                    } else if (product.categories.includes(filter)) {
+                        // Only display product name if a specific category is selected
                         filteredHTML += `<div class="product"><h2>${product.name}</h2></div>`;
                     }
                 });
