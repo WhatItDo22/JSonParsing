@@ -5,49 +5,54 @@
     <title>Filtered Products Display</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+                body {
+            font-family: 'Arial', sans-serif;
             margin: 20px;
             padding: 20px;
-            background-color: #f0f0f0;
+            background-color: #f9f9f9;
+            color: #333;
         }
         .product, #filteredProducts {
-            background-color: #fff;
+            background-color: #ffffff;
             padding: 20px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #e1e1e8;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 8px;
         }
         .product h2 {
             margin-top: 0;
             color: #333;
-        }
-        .price, .categories {
-            font-weight: bold;
+            font-size: 24px;
         }
         .price {
+            font-weight: bold;
             color: #28a745;
+            font-size: 18px;
         }
         .categories {
+            font-weight: bold;
             color: #007bff;
+            font-size: 16px;
+        }
+        #filterBtn, #categoryFilter {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
         }
         #filterBtn {
-            background-color: #007bff;
+            background-color: #0056b3;
             color: white;
-            padding: 10px 20px;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
         }
         #filterBtn:hover {
-            background-color: #0056b3;
+            background-color: #004094;
         }
         #categoryFilter {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            margin-top: 10px;
+            cursor: pointer;
         }
     </style>
 </head>
