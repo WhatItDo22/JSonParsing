@@ -1,0 +1,65 @@
+{
+    "products": [
+      {
+        "name": "Vintage T-shirt",
+        "description": "Tie-dye Grateful Dead T-shirt",
+        "price": 35,
+        "categories": ["clothing", "vintage"]
+      },
+      {
+        "name": "LED Desk Lamp",
+        "description": "Adjustable brightness desk lamp with USB charging port",
+        "price": 45,
+        "categories": ["electronics", "home"]
+      },
+      {
+        "name": "Eco-friendly Water Bottle",
+        "description": "Reusable, BPA-free 32oz water bottle",
+        "price": 20,
+        "categories": ["home", "outdoors"]
+      },
+      {
+        "name": "Trail Running Shoes",
+        "description": "Lightweight and durable running shoes for trail",
+        "price": 120,
+        "categories": ["clothing", "outdoors"]
+      },
+      {
+        "name": "Bluetooth Headphones",
+        "description": "Wireless over-ear headphones with noise cancellation",
+        "price": 85,
+        "categories": ["electronics"]
+      },
+      {
+        "name": "Organic Coffee Beans",
+        "description": "Premium blend organic coffee beans, 1lb",
+        "price": 15,
+        "categories": ["home", "food"]
+      },
+      {
+        "name": "Graphic Novel",
+        "description": "Exclusive edition graphic novel with art prints",
+        "price": 30,
+        "categories": ["books"]
+      },
+      {
+        "name": "Smart Watch",
+        "description": "Water-resistant smartwatch with health tracking",
+        "price": 199,
+        "categories": ["electronics", "clothing"]
+      },
+      {
+        "name": "Yoga Mat",
+        "description": "Eco-friendly, non-slip yoga mat",
+        "price": 50,
+        "categories": ["home", "outdoors"]
+      },
+      {
+        "name": "Spice Rack Organizer",
+        "description": "Wall-mounted spice rack with 12 jars",
+        "price": 25,
+        "categories": ["home"]
+      }
+    ]
+  }
+  

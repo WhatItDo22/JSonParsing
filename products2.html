@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products JSON Display</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .product {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .product h2 {
+            margin-top: 0;
+        }
+
+        .price {
+            color: green;
+        }
+
+        .categories {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Products</h1>
+    <div id="productsDisplay"></div>
+
+    <script>
+        $.get('products.json', function(data) {
+            let productsHTML = '';
+            data.products.forEach(product => {
+                productsHTML += `<div class="product">
+                                    <h2>${product.name}</h2>
+                                    <p>${product.description}</p>
+                                    <p class="price">Price: $${product.price}</p>
+                                    <p class="categories">Categories: ${product.categories.join(', ')}</p>
+                                 </div>`;
+            });
+            $('#productsDisplay').html(productsHTML);
+        }, 'json');
+    </script>
+</body>
+</html>
