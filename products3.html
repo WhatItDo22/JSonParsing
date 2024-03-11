@@ -66,7 +66,6 @@
 
     <script>
         $.get('products.json', function(data) {
-            let categories = new Set(['All']); // Ensure 'All' is included
             data.products.forEach(product => {
                 product.categories.forEach(category => categories.add(category));
             });
@@ -87,14 +86,13 @@
                                             <p class="categories">Categories: ${product.categories.join(', ')}</p>
                                           </div>`;
                     } else if (product.categories.includes(filter)) {
-                        // Only display product name if a specific category is selected
+
                         filteredHTML += `<div class="product"><h2>${product.name}</h2></div>`;
                     }
                 });
                 $('#filteredProducts').html(filteredHTML);
             };
 
-            // Initial display of all products
             displayProducts();
 
             $('#filterBtn').click(function() {
