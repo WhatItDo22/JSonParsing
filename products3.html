@@ -5,66 +5,68 @@
     <title>Filtered Products Display</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
-                body {
+            body {
             font-family: 'Arial', sans-serif;
             margin: 20px;
             padding: 20px;
             background-color: #f9f9f9;
             color: #333;
-        }
-        .product, #filteredProducts {
+            }
+            .product, #filteredProducts {
             background-color: #ffffff;
             padding: 20px;
             margin-bottom: 20px;
             border: 1px solid #e1e1e8;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             border-radius: 8px;
-        }
-        .product h2 {
+            }
+            .product h2 {
             margin-top: 0;
             color: #333;
             font-size: 24px;
-        }
-        .price {
+            }
+            .price {
             font-weight: bold;
             color: #28a745;
             font-size: 18px;
-        }
-        .categories {
+            }
+            .categories {
             font-weight: bold;
             color: #007bff;
             font-size: 16px;
-        }
-        #filterBtn, #categoryFilter {
+            }
+            #filterBtn, #categoryFilter {
             padding: 10px 20px;
             font-size: 16px;
             border-radius: 5px;
             margin: 10px 0;
             border: 1px solid #ddd;
-        }
-        #filterBtn {
+            }
+            #filterBtn {
             background-color: #0056b3;
             color: white;
             border: none;
             cursor: pointer;
-        }
-        #filterBtn:hover {
+            }
+            #filterBtn:hover {
             background-color: #004094;
-        }
-        #categoryFilter {
+            }
+            #categoryFilter {
             cursor: pointer;
-        }
+            }
     </style>
 </head>
 <body>
     <h1>Filter Products</h1>
-    <select id="categoryFilter"></select>
+    <select id="categoryFilter">
+        <option value="All">All</option>
+    </select>
     <button id="filterBtn">Filter</button>
     <div id="filteredProducts"></div>
 
     <script>
         $.get('products.json', function(data) {
-            let categories = new Set(['All']); // Add 'All' to the categories set
+            let categories = new Set(['All']); // Ensure 'All' is included
             data.products.forEach(product => {
                 product.categories.forEach(category => categories.add(category));
             });
@@ -73,15 +75,12 @@
                 $('#categoryFilter').append(new Option(category, category));
             });
 
-            const displayProducts = (filter = null) => {
+            const displayProducts = (filter = 'All') => {
                 let filteredHTML = '';
                 data.products.forEach(product => {
-                    if (!filter || filter === 'All' || product.categories.includes(filter)) {
-                        filteredHTML += `<div class="product">
-                                            <h2>${product.name}</h2>
-                                            <p class="price">Price: $${product.price}</p>
-                                            <p class="categories">Categories: ${product.categories.join(', ')}</p>
-                                          </div>`;
+                    if (filter === 'All' || product.categories.includes(filter)) {
+                        // Adjusted to display only the product name
+                        filteredHTML += `<div class="product"><h2>${product.name}</h2></div>`;
                     }
                 });
                 $('#filteredProducts').html(filteredHTML);
